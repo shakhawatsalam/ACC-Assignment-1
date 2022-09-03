@@ -3,7 +3,8 @@ const cors = require("cors");
 const app = express();
 const port = 5000;
 const http = require('http');
-const user = require('./UserData.json')
+const user = require('./UserData.json');
+const { stringify } = require("querystring");
 // console.log(user);
 
 
@@ -12,25 +13,27 @@ app.use(express.json());
 // console.log(user);
 
 app.get('/', (req, res) => {
-    // const User = JSON.parse(user);
     res.json("hello world")
 });
+// GET /user/all A list of random users
 app.get('/user/all', (req, res) => {
-    // const User = JSON.parse(user);
     res.json(user)
 });
+
+// GET /user/random A random user
 app.get('/user/random', (req, res) => {
     const randomNumber = Math.floor(Math.random() * user.length) + 1;
     const randomUser = user.find(ran => ran.id == randomNumber);
     console.log(randomUser)
     res.json(randomUser)
 });
+
+// POST /user/save Save a random user
 app.post('/user/save', (req, res) => {
     const newUser = req.body;
     const userInput = Object.keys(newUser);
     console.log(user)
     const MyArray = ['id', 'gender', 'name', 'contact', 'address', 'photoUrl'];
-    // console.log("mYArray", MyArray);
     if (JSON.stringify(userInput) === JSON.stringify(MyArray)) {
         user.push(newUser);
         res.send(user);
@@ -39,6 +42,30 @@ app.post('/user/save', (req, res) => {
     }
 });
 
+// PATCH /user/update Update a random user
+
+app.patch('/user/update/:id', (req, res) => {
+    const { id } = req.params;
+   
+    const { _id, gender, name, contact, address, photoUrl } = req.body;
+    const updateUser = user.find(upda => upda.id == id);
+    console.log(id, req.body.id);
+    if (id == req.body.id) {
+        updateUser.id = id;
+        updateUser.gender = gender;
+        updateUser.name = name;
+        updateUser.contact = contact;
+        updateUser.address = address;
+        updateUser.photoUrl = photoUrl;
+
+        res.send(updateUser);
+    } else {
+
+        res.json("Id Not Same")
+    }
+    // res.send("hello world")
+    // console.log(presentData.id)
+});
 
 
 app.listen(port, () => {
