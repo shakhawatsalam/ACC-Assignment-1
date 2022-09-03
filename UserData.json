@@ -1,0 +1,34 @@
+[
+    {
+    "id": 1,
+    "gender": "male",
+    "name": "Ab de",
+    "contact":"01875546",
+    "address": "South Africa",
+    "photoUrl": "Hello word"
+    },
+    {
+        "id": 2,
+        "gender": "male",
+        "name": "Koli",
+        "contact":"018ef75546dd",
+        "address": "india",
+        "photoUrl": "Hello india" 
+    },
+    {
+        "id": 3,
+        "gender": "male",
+        "name": "Shakib al hassan",
+        "contact":"018ef75546ss",
+        "address": "Bangladesh",
+        "photoUrl": "Hello Bangladesh" 
+    },
+    {
+        "id": 4,
+        "gender": "male",
+        "name": "mashrfii",
+        "contact":"018ef75546aa",
+        "address": "Bangladesh",
+        "photoUrl": "Hello Bangladesh" 
+    }
+]
