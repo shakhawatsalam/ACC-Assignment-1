@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const port = 5000;
-const http = require('http'); 
+const http = require('http');
 const user = require('./UserData.json')
 // console.log(user);
 
@@ -20,17 +20,25 @@ app.get('/user/all', (req, res) => {
     res.json(user)
 });
 app.get('/user/random', (req, res) => {
-    const randomNumber = Math.floor(Math.random() * user.length)+1;
+    const randomNumber = Math.floor(Math.random() * user.length) + 1;
     const randomUser = user.find(ran => ran.id == randomNumber);
     console.log(randomUser)
     res.json(randomUser)
 });
-// http.createServer((function (req, res) {
-//     res.send(200, { "Content-Type: 'application/json"})
-//     res.end();
-// })).listen(port)
+app.post('/user/save', (req, res) => {
+    const newUser = req.body;
+    const userInput = Object.keys(newUser);
+    console.log(user)
+    const MyArray = ['id', 'gender', 'name', 'contact', 'address', 'photoUrl'];
+    // console.log("mYArray", MyArray);
+    if (JSON.stringify(userInput) === JSON.stringify(MyArray)) {
+        user.push(newUser);
+        res.send(user);
+    } else {
+        res.send("Please put all fields")
+    }
+});
 
-// useage of route
 
 
 app.listen(port, () => {
