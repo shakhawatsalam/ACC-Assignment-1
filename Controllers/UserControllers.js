@@ -2,6 +2,6 @@ import express from "express";
 
 
 
-export const getPost = async (req, res) => {
+export const get = async (req, res) => {
     
 }

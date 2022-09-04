@@ -46,7 +46,7 @@ app.post('/user/save', (req, res) => {
 
 app.patch('/user/update/:id', (req, res) => {
     const { id } = req.params;
-   
+
     const { _id, gender, name, contact, address, photoUrl } = req.body;
     const updateUser = user.find(upda => upda.id == id);
     console.log(id, req.body.id);
@@ -66,7 +66,23 @@ app.patch('/user/update/:id', (req, res) => {
     // res.send("hello world")
     // console.log(presentData.id)
 });
-
+// DELETE /user/ delete
+app.delete('/user/delete/:id', (req, res) => {
+    const { id } = req.params;
+    console.log(id);
+    // const deleteUser = user.find(u => u.id == id);
+    if (id == req.body.id) {
+       const deleteUser = user.filter(u => u.id !== Number(id));
+        res.send(deleteUser);
+    } else {
+        res.send ("Id is not same")
+    }
+})
+//PATCH /user/bulk-update update multiple users
+// app.patch('/user/bulk-update', (req, res) => {
+//     console.log(req.body);
+//     res.json("hello world")
+// });
 
 app.listen(port, () => {
     console.log("listening to", port);
