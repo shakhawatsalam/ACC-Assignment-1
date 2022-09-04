@@ -1,10 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const port = 5000;
-const http = require('http');
+const port = process.env.PORT || 5000;
 const user = require('./UserData.json');
-const { stringify } = require("querystring");
 // console.log(user);
 
 
